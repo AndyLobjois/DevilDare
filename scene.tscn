@@ -1,0 +1,241 @@
+[gd_scene load_steps=15 format=3 uid="uid://bucexj5a45u4b"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5nidb"]
+[ext_resource type="Theme" uid="uid://dmqbpgans8ta1" path="res://theme.tres" id="2_dlbho"]
+[ext_resource type="Texture2D" uid="uid://cmoehykx8qfi4" path="res://textures/shine.png" id="3_k1iij"]
+[ext_resource type="Texture2D" uid="uid://ddvl3p6cn6meq" path="res://textures/lock_on.png" id="3_lik0e"]
+[ext_resource type="Texture2D" uid="uid://b6evlveo3vcnd" path="res://textures/lock_off.png" id="4_r5dwr"]
+[ext_resource type="AudioStream" uid="uid://ba314abghdfiq" path="res://sounds/sfx_add.mp3" id="5_s1wsb"]
+[ext_resource type="AudioStream" uid="uid://ckuc78te86ot2" path="res://sounds/sfx_sub.mp3" id="6_py3dn"]
+[ext_resource type="AudioStream" uid="uid://d2uyrxias14uj" path="res://sounds/sfx_end.mp3" id="7_vg21c"]
+
+[sub_resource type="Animation" id="Animation_8q7j4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_3afnn"]
+resource_name = "add"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.0333333, 0.0666667, 0.116667, 0.166667, 0.25, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(15, 32), Vector2(3, 25), Vector2(6, 38), Vector2(12, 31), Vector2(9, 32), Vector2(11, 29), Vector2(10, 31), Vector2(10, 30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x1tg5"]
+_data = {
+"RESET": SubResource("Animation_8q7j4"),
+"add": SubResource("Animation_3afnn")
+}
+
+[sub_resource type="Animation" id="Animation_adkg5"]
+resource_name = "BarShine"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShineButton:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ur3c2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShineButton:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yf235"]
+_data = {
+"BarShine": SubResource("Animation_adkg5"),
+"RESET": SubResource("Animation_ur3c2")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5nidb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x1tg5")
+}
+
+[node name="Text" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 19.0
+offset_top = 3.0
+offset_right = -20.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme = ExtResource("2_dlbho")
+placeholder_text = "Write your challenge here ..."
+alignment = 1
+expand_to_text_length = true
+
+[node name="Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = -8.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme = ExtResource("2_dlbho")
+max_value = 10.0
+step = 1.0
+rounded = true
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Bar"]
+libraries = {
+"": SubResource("AnimationLibrary_yf235")
+}
+
+[node name="Label" type="Label" parent="Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = -4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dlbho")
+theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+text = "1 / 10"
+horizontal_alignment = 2
+
+[node name="ShineButton" type="Button" parent="Bar"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dlbho")
+disabled = true
+button_mask = 0
+
+[node name="LabelButton" type="Button" parent="Bar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="LabelEdit" type="LineEdit" parent="Bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = -4.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dlbho")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+placeholder_text = "50"
+alignment = 2
+max_length = 100000
+
+[node name="Shine" type="TextureRect" parent="Bar"]
+modulate = Color(1, 1, 1, 0.12549)
+clip_contents = true
+layout_mode = 0
+offset_left = 41.0
+offset_top = 1.0
+offset_right = 106.0
+offset_bottom = 20.0
+texture = ExtResource("3_k1iij")
+expand_mode = 1
+
+[node name="LockButton" type="Button" parent="."]
+modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 18.0
+offset_bottom = 18.0
+theme = ExtResource("2_dlbho")
+theme_override_font_sizes/font_size = 8
+flat = true
+
+[node name="LockOn" type="TextureRect" parent="LockButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_lik0e")
+expand_mode = 3
+
+[node name="LockOff" type="TextureRect" parent="LockButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_r5dwr")
+expand_mode = 3
+
+[node name="AudioAdd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s1wsb")
+
+[node name="AudioSub" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_py3dn")
+
+[node name="AudioEnd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vg21c")
+
+[connection signal="pressed" from="Bar/LabelButton" to="." method="_on_LabelButton_pressed"]
+[connection signal="pressed" from="LockButton" to="." method="_on_lock_pressed"]
