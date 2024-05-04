@@ -22,7 +22,7 @@ var isEnd = false
 func _ready():
     # Save
     if not FileAccess.file_exists(savePath):
-        var screen = DisplayServer.screen_get_size()
+        var screen = DisplayServer.screen_get_size(DisplayServer.MAIN_WINDOW_ID)
         var window = get_viewport().get_visible_rect().size
         get_window().position = Vector2((screen.x/2-window.x/2),(screen.y-window.y) - 20)
     load_data()
