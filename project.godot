@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DevilDare"
-config/version="1.0"
+config/version="1.2"
 run/main_scene="res://scene.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 0)
@@ -25,7 +25,7 @@ GlobalInput="*res://addons/global_input/autoloads/global_input_gdscript/GlobalIn
 [display]
 
 window/size/viewport_width=400
-window/size/viewport_height=60
+window/size/viewport_height=268
 window/size/borderless=true
 window/size/always_on_top=true
 window/size/transparent=true

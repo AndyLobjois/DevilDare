@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundPack" load_steps=5 format=3 uid="uid://d0mjf8mkew12h"]
+
+[ext_resource type="AudioStream" uid="uid://cc8h5e6s5nnxp" path="res://sounds/ff_add.mp3" id="1_lhcrx"]
+[ext_resource type="Script" path="res://scripts/soundpack.gd" id="1_ma8vi"]
+[ext_resource type="AudioStream" uid="uid://dcsky5f78is5d" path="res://sounds/ff_end.mp3" id="2_pl5kj"]
+[ext_resource type="AudioStream" uid="uid://bwmfi6vug7w8k" path="res://sounds/ff_sub.mp3" id="4_wdd13"]
+
+[resource]
+script = ExtResource("1_ma8vi")
+name = ""
+add = ExtResource("1_lhcrx")
+sub = ExtResource("4_wdd13")
+end = ExtResource("2_pl5kj")

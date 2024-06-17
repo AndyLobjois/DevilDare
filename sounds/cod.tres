@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundPack" load_steps=5 format=3 uid="uid://dyu3d3ursupyo"]
+
+[ext_resource type="AudioStream" uid="uid://dkff3loiqr8fc" path="res://sounds/cod_add.mp3" id="1_fht22"]
+[ext_resource type="AudioStream" uid="uid://dipwsy7poheib" path="res://sounds/cod_end.mp3" id="2_0akna"]
+[ext_resource type="Script" path="res://scripts/soundpack.gd" id="3_giyjp"]
+[ext_resource type="AudioStream" uid="uid://by6ofe70gvgst" path="res://sounds/cod_sub.mp3" id="4_wsvqp"]
+
+[resource]
+script = ExtResource("3_giyjp")
+name = ""
+add = ExtResource("1_fht22")
+sub = ExtResource("4_wsvqp")
+end = ExtResource("2_0akna")

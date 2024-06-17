@@ -1,4 +1,7 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dmqbpgans8ta1"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://dmqbpgans8ta1"]
+
+[ext_resource type="Texture2D" uid="uid://n8nmefagibhg" path="res://textures/switch_on.png" id="1_dscvq"]
+[ext_resource type="Texture2D" uid="uid://dtq30frsc8ssg" path="res://textures/switch_off.png" id="2_1hs3d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dknhu"]
 bg_color = Color(1, 1, 1, 1)
@@ -11,9 +14,82 @@ shadow_size = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbkt3"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3na05"]
+bg_color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="ImageTexture" id="ImageTexture_vse10"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_64t6u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oryod"]
+bg_color = Color(0.819608, 0.164706, 0.262745, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxa7n"]
+bg_color = Color(0.929412, 0.239216, 0.321569, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_geyxx"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8c42m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6opw2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_033no"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.121569, 0.121569, 0.121569, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rphox"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4ki5"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4o22"]
 content_margin_left = 5.0
@@ -49,14 +125,29 @@ shadow_color = Color(0.827451, 0.207843, 0.180392, 0.505882)
 shadow_size = 8
 
 [resource]
+Button/font_sizes/font_size = 12
 Button/styles/disabled = SubResource("StyleBoxFlat_dknhu")
 Button/styles/focus = SubResource("StyleBoxEmpty_lbkt3")
+Button/styles/normal = SubResource("StyleBoxFlat_3na05")
+CheckButton/icons/checked = ExtResource("1_dscvq")
+CheckButton/icons/unchecked = ExtResource("2_1hs3d")
+ColorPicker/constants/sv_height = 240
+ColorPicker/constants/sv_width = 240
+HSlider/icons/grabber = SubResource("ImageTexture_vse10")
+HSlider/icons/grabber_highlight = SubResource("ImageTexture_64t6u")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_oryod")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_mxa7n")
+HSlider/styles/slider = SubResource("StyleBoxFlat_geyxx")
 Label/colors/font_outline_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 Label/constants/outline_size = 6
 LineEdit/colors/font_outline_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 LineEdit/constants/outline_size = 6
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_8c42m")
 LineEdit/styles/normal = SubResource("StyleBoxEmpty_6opw2")
+OptionButton/font_sizes/font_size = 12
+OptionButton/styles/hover = SubResource("StyleBoxFlat_033no")
+OptionButton/styles/normal = SubResource("StyleBoxFlat_rphox")
+OptionButton/styles/pressed = SubResource("StyleBoxFlat_f4ki5")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_u4o22")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_5463b")
 TooltipLabel/font_sizes/font_size = 11

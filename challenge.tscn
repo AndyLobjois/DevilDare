@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbpdp26rr5ap2"]
+
+[ext_resource type="Theme" uid="uid://dmqbpgans8ta1" path="res://theme.tres" id="1_p582r"]
+[ext_resource type="Script" path="res://scripts/challenge.gd" id="1_rwxln"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nlch"]
+bg_color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Challenge" type="Control" node_paths=PackedStringArray("state", "color", "text", "value")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 24.0
+script = ExtResource("1_rwxln")
+state = NodePath("Bool")
+color = NodePath("Color")
+text = NodePath("Text")
+value = NodePath("Value")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nlch")
+
+[node name="Separator" type="Panel" parent="Panel"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_right = -60.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Bool" type="CheckButton" parent="."]
+modulate = Color(0.898039, 0.211765, 0.301961, 1)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 43.0
+grow_vertical = 2
+theme = ExtResource("1_p582r")
+button_pressed = true
+flat = true
+
+[node name="Color" type="ColorPickerButton" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 4.0
+offset_right = 64.0
+offset_bottom = -4.0
+grow_vertical = 2
+theme = ExtResource("1_p582r")
+flat = true
+color = Color(0.819608, 0.164706, 0.262745, 1)
+edit_alpha = false
+
+[node name="Text" type="LineEdit" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 1.0
+offset_right = -64.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_p582r")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "-"
+alignment = 1
+select_all_on_focus = true
+
+[node name="Value" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("1_p582r")
+theme_override_font_sizes/font_size = 12
+placeholder_text = "@"
+alignment = 1
+max_length = 5
+virtual_keyboard_type = 2
+select_all_on_focus = true
+
+[connection signal="pressed" from="Bool" to="." method="event"]
+[connection signal="popup_closed" from="Color" to="." method="event"]
+[connection signal="focus_entered" from="Text" to="." method="event"]
+[connection signal="text_submitted" from="Text" to="." method="event_value"]
+[connection signal="focus_entered" from="Value" to="." method="event"]
+[connection signal="text_submitted" from="Value" to="." method="event_value"]

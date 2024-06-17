@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SoundPack" load_steps=5 format=3 uid="uid://d4bcv3lrxsyie"]
+
+[ext_resource type="Script" path="res://scripts/soundpack.gd" id="1_cj7d4"]
+[ext_resource type="AudioStream" uid="uid://ba314abghdfiq" path="res://sounds/kabuki_add.mp3" id="1_ms3vp"]
+[ext_resource type="AudioStream" uid="uid://d2uyrxias14uj" path="res://sounds/kabuki_end.mp3" id="2_hy8pu"]
+[ext_resource type="AudioStream" uid="uid://ckuc78te86ot2" path="res://sounds/kabuki_sub.mp3" id="4_eygp0"]
+
+[resource]
+script = ExtResource("1_cj7d4")
+name = "Kabuki"
+add = ExtResource("1_ms3vp")
+sub = ExtResource("4_eygp0")
+end = ExtResource("2_hy8pu")

@@ -1,20 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://bucexj5a45u4b"]
+[gd_scene load_steps=25 format=3 uid="uid://bucexj5a45u4b"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_5nidb"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_5nidb"]
 [ext_resource type="Theme" uid="uid://dmqbpgans8ta1" path="res://theme.tres" id="2_dlbho"]
+[ext_resource type="Resource" uid="uid://d4bcv3lrxsyie" path="res://sounds/kabuki.tres" id="2_ofuvl"]
 [ext_resource type="Texture2D" uid="uid://cmoehykx8qfi4" path="res://textures/shine.png" id="3_k1iij"]
-[ext_resource type="Texture2D" uid="uid://ddvl3p6cn6meq" path="res://textures/lock_on.png" id="3_lik0e"]
-[ext_resource type="Texture2D" uid="uid://b6evlveo3vcnd" path="res://textures/lock_off.png" id="4_r5dwr"]
-[ext_resource type="AudioStream" uid="uid://ba314abghdfiq" path="res://sounds/sfx_add.mp3" id="5_s1wsb"]
-[ext_resource type="AudioStream" uid="uid://ckuc78te86ot2" path="res://sounds/sfx_sub.mp3" id="6_py3dn"]
-[ext_resource type="AudioStream" uid="uid://d2uyrxias14uj" path="res://sounds/sfx_end.mp3" id="7_vg21c"]
+[ext_resource type="Resource" uid="uid://dyu3d3ursupyo" path="res://sounds/cod.tres" id="3_suwxr"]
+[ext_resource type="Resource" uid="uid://d0mjf8mkew12h" path="res://sounds/ff.tres" id="4_lva40"]
+[ext_resource type="AudioStream" uid="uid://ba314abghdfiq" path="res://sounds/kabuki_add.mp3" id="5_s1wsb"]
+[ext_resource type="AudioStream" uid="uid://ckuc78te86ot2" path="res://sounds/kabuki_sub.mp3" id="6_py3dn"]
+[ext_resource type="AudioStream" uid="uid://d2uyrxias14uj" path="res://sounds/kabuki_end.mp3" id="7_vg21c"]
+[ext_resource type="PackedScene" uid="uid://cbpdp26rr5ap2" path="res://challenge.tscn" id="9_lgioj"]
 
 [sub_resource type="Animation" id="Animation_8q7j4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Bar:position")
+tracks/0/path = NodePath("ChallengeBar:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -30,7 +32,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Bar:position")
+tracks/0/path = NodePath("ChallengeBar:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -82,7 +84,58 @@ _data = {
 "RESET": SubResource("Animation_ur3c2")
 }
 
-[node name="Main" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pxfa"]
+bg_color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmqfp"]
+bg_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0117647, 0.0117647, 0.0117647, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x6o3"]
+bg_color = Color(0.0235294, 0.0235294, 0.0235294, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.156863, 0.156863, 0.156863, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_08g4v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_snd8r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdqu2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujnlr"]
+bg_color = Color(0.6, 0.6, 0.6, 0.0784314)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7dnen"]
+
+[node name="Main" type="Control" node_paths=PackedStringArray("challenges")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,47 +143,62 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5nidb")
+challenges = [NodePath("Settings/Challenges/Container/Challenge0"), NodePath("Settings/Challenges/Container/Challenge1"), NodePath("Settings/Challenges/Container/Challenge2"), NodePath("Settings/Challenges/Container/Challenge3"), NodePath("Settings/Challenges/Container/Challenge4"), NodePath("Settings/Challenges/Container/Challenge5")]
+sounds = Array[Resource("res://scripts/soundpack.gd")]([ExtResource("2_ofuvl"), ExtResource("4_lva40"), ExtResource("3_suwxr")])
+metadata/_edit_vertical_guides_ = [392.0, 10.0]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_x1tg5")
 }
 
-[node name="Text" type="LineEdit" parent="."]
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioAdd" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_s1wsb")
+
+[node name="AudioSub" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("6_py3dn")
+
+[node name="AudioEnd" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("7_vg21c")
+
+[node name="ChallengeText" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 19.0
+offset_left = 23.0
 offset_top = 3.0
 offset_right = -20.0
 offset_bottom = 26.0
 grow_horizontal = 2
 theme = ExtResource("2_dlbho")
-placeholder_text = "Write your challenge here ..."
-alignment = 1
-expand_to_text_length = true
+text = "..."
+horizontal_alignment = 1
 
-[node name="Bar" type="ProgressBar" parent="."]
+[node name="ChallengeBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 10.0
 offset_top = 30.0
 offset_right = -8.0
-offset_bottom = 50.0
+offset_bottom = 51.0
 grow_horizontal = 2
+pivot_offset = Vector2(195, 0)
 theme = ExtResource("2_dlbho")
 max_value = 10.0
 step = 1.0
 rounded = true
 show_percentage = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bar"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ChallengeBar"]
 libraries = {
 "": SubResource("AnimationLibrary_yf235")
 }
 
-[node name="Label" type="Label" parent="Bar"]
+[node name="Label" type="Label" parent="ChallengeBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,10 +211,10 @@ grow_vertical = 2
 theme = ExtResource("2_dlbho")
 theme_override_colors/font_color = Color(1, 1, 1, 0.501961)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-text = "1 / 10"
+text = "-- / --"
 horizontal_alignment = 2
 
-[node name="ShineButton" type="Button" parent="Bar"]
+[node name="ShineButton" type="Button" parent="ChallengeBar"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -158,34 +226,7 @@ theme = ExtResource("2_dlbho")
 disabled = true
 button_mask = 0
 
-[node name="LabelButton" type="Button" parent="Bar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-
-[node name="LabelEdit" type="LineEdit" parent="Bar"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -2.0
-offset_right = -4.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_dlbho")
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-placeholder_text = "50"
-alignment = 2
-max_length = 100000
-
-[node name="Shine" type="TextureRect" parent="Bar"]
+[node name="Shine" type="TextureRect" parent="ChallengeBar"]
 modulate = Color(1, 1, 1, 0.12549)
 clip_contents = true
 layout_mode = 0
@@ -196,46 +237,254 @@ offset_bottom = 20.0
 texture = ExtResource("3_k1iij")
 expand_mode = 1
 
-[node name="LockButton" type="Button" parent="."]
-modulate = Color(0.435294, 0.435294, 0.435294, 1)
+[node name="Settings" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 1
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 18.0
-offset_bottom = 18.0
-theme = ExtResource("2_dlbho")
-theme_override_font_sizes/font_size = 8
-flat = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 68.0
+offset_bottom = 268.0
+grow_horizontal = 2
 
-[node name="LockOn" type="TextureRect" parent="LockButton"]
+[node name="ReadType" type="OptionButton" parent="Settings"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 85.0
+offset_bottom = 25.0
+theme = ExtResource("2_dlbho")
+item_count = 3
+selected = 1
+popup/item_0/text = "Stay"
+popup/item_0/id = 0
+popup/item_1/text = "Loop"
+popup/item_1/id = 1
+popup/item_2/text = "Random"
+popup/item_2/id = 2
+
+[node name="BindButton" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 4.0
+offset_right = 165.0
+offset_bottom = 25.0
+theme = ExtResource("2_dlbho")
+text = "Binds"
+
+[node name="AudioType" type="OptionButton" parent="Settings"]
+layout_mode = 1
+offset_left = 168.0
+offset_top = 4.0
+offset_right = 329.0
+offset_bottom = 25.0
+theme = ExtResource("2_dlbho")
+item_count = 4
+selected = 0
+popup/item_0/text = "Kabuki Sounds"
+popup/item_0/id = 0
+popup/item_1/text = "Final Fantasy Sounds"
+popup/item_1/id = 1
+popup/item_2/text = "Call Of Duty Sounds"
+popup/item_2/id = 2
+popup/item_3/text = "Custom Sounds ..."
+popup/item_3/id = 3
+
+[node name="AudioVolume" type="Panel" parent="Settings"]
+custom_minimum_size = Vector2(60, 21)
+layout_mode = 1
+offset_left = 332.0
+offset_top = 4.0
+offset_right = 392.0
+offset_bottom = 25.0
+mouse_filter = 2
+theme = ExtResource("2_dlbho")
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pxfa")
+
+[node name="Slider" type="HSlider" parent="Settings/AudioVolume"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
+offset_right = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_lik0e")
-expand_mode = 3
+theme = ExtResource("2_dlbho")
+max_value = 30.0
+value = 23.0
 
-[node name="LockOff" type="TextureRect" parent="LockButton"]
+[node name="Challenges" type="ScrollContainer" parent="Settings"]
+custom_minimum_size = Vector2(382, 30)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 28.0
+offset_right = 392.0
+offset_bottom = 200.0
+horizontal_scroll_mode = 0
+
+[node name="Container" type="VBoxContainer" parent="Settings/Challenges"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Challenge0" parent="Settings/Challenges/Container" instance=ExtResource("9_lgioj")]
+layout_mode = 2
+
+[node name="Text" parent="Settings/Challenges/Container/Challenge0" index="3"]
+text = "Win @ rounds !"
+
+[node name="Value" parent="Settings/Challenges/Container/Challenge0" index="4"]
+text = "50"
+
+[node name="Challenge1" parent="Settings/Challenges/Container" instance=ExtResource("9_lgioj")]
+layout_mode = 2
+
+[node name="Color" parent="Settings/Challenges/Container/Challenge1" index="2"]
+color = Color(0.886275, 0.666667, 0.368627, 1)
+
+[node name="Text" parent="Settings/Challenges/Container/Challenge1" index="3"]
+text = "Do @ BNB !"
+
+[node name="Value" parent="Settings/Challenges/Container/Challenge1" index="4"]
+text = "30"
+
+[node name="Challenge2" parent="Settings/Challenges/Container" instance=ExtResource("9_lgioj")]
+layout_mode = 2
+
+[node name="Color" parent="Settings/Challenges/Container/Challenge2" index="2"]
+color = Color(0.454902, 0.317647, 0.745098, 1)
+
+[node name="Text" parent="Settings/Challenges/Container/Challenge2" index="3"]
+text = "Tech @ throws !"
+
+[node name="Value" parent="Settings/Challenges/Container/Challenge2" index="4"]
+text = "10"
+
+[node name="Challenge3" parent="Settings/Challenges/Container" instance=ExtResource("9_lgioj")]
+layout_mode = 2
+
+[node name="Bool" parent="Settings/Challenges/Container/Challenge3" index="1"]
+button_pressed = false
+
+[node name="Color" parent="Settings/Challenges/Container/Challenge3" index="2"]
+color = Color(0.282353, 0.878431, 0.639216, 1)
+
+[node name="Value" parent="Settings/Challenges/Container/Challenge3" index="4"]
+text = "5"
+
+[node name="Challenge4" parent="Settings/Challenges/Container" instance=ExtResource("9_lgioj")]
+layout_mode = 2
+
+[node name="Bool" parent="Settings/Challenges/Container/Challenge4" index="1"]
+button_pressed = false
+
+[node name="Color" parent="Settings/Challenges/Container/Challenge4" index="2"]
+color = Color(0.968627, 0.647059, 0.776471, 1)
+
+[node name="Value" parent="Settings/Challenges/Container/Challenge4" index="4"]
+text = "5"
+
+[node name="Challenge5" parent="Settings/Challenges/Container" instance=ExtResource("9_lgioj")]
+layout_mode = 2
+
+[node name="Bool" parent="Settings/Challenges/Container/Challenge5" index="1"]
+button_pressed = false
+
+[node name="Color" parent="Settings/Challenges/Container/Challenge5" index="2"]
+color = Color(0.831373, 0.831373, 0.831373, 1)
+
+[node name="Value" parent="Settings/Challenges/Container/Challenge5" index="4"]
+text = "5"
+
+[node name="BindWindow" type="Panel" parent="Settings"]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_r5dwr")
-expand_mode = 3
+offset_left = 91.0
+offset_top = -12.0
+offset_right = 311.0
+offset_bottom = 45.0
+pivot_offset = Vector2(110, 0)
+theme = ExtResource("2_dlbho")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tmqfp")
 
-[node name="AudioAdd" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_s1wsb")
+[node name="AddLabel" type="Label" parent="Settings/BindWindow"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = 94.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 12
+text = "Bind -"
+horizontal_alignment = 1
 
-[node name="AudioSub" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_py3dn")
+[node name="SubLabel" type="Label" parent="Settings/BindWindow"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 8.0
+offset_right = 201.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 12
+text = "Bind +"
+horizontal_alignment = 1
 
-[node name="AudioEnd" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_vg21c")
+[node name="SubButton" type="Button" parent="Settings/BindWindow"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 28.0
+offset_right = 106.0
+offset_bottom = 49.0
+theme = ExtResource("2_dlbho")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3x6o3")
+text = "..."
 
-[connection signal="pressed" from="Bar/LabelButton" to="." method="_on_LabelButton_pressed"]
-[connection signal="pressed" from="LockButton" to="." method="_on_lock_pressed"]
+[node name="AddButton" type="Button" parent="Settings/BindWindow"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 28.0
+offset_right = 213.0
+offset_bottom = 49.0
+theme = ExtResource("2_dlbho")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3x6o3")
+text = "..."
+
+[node name="Close" type="Button" parent="Settings/BindWindow"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 4.0
+offset_right = 218.0
+offset_bottom = 18.0
+theme_override_font_sizes/font_size = 10
+theme_override_styles/hover = SubResource("StyleBoxEmpty_08g4v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_snd8r")
+text = "✖"
+flat = true
+
+[node name="LockButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.997
+offset_right = 1.20001
+offset_bottom = 60.0
+theme = ExtResource("2_dlbho")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_vdqu2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ujnlr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7dnen")
+
+[connection signal="finished" from="Audio/AudioEnd" to="." method="on_audio_end"]
+[connection signal="item_selected" from="Settings/ReadType" to="." method="on_selected"]
+[connection signal="pressed" from="Settings/BindButton" to="." method="on_bindbutton"]
+[connection signal="item_selected" from="Settings/AudioType" to="." method="change_sounds"]
+[connection signal="drag_ended" from="Settings/AudioVolume/Slider" to="." method="on_selected"]
+[connection signal="value_changed" from="Settings/AudioVolume/Slider" to="." method="on_volume"]
+[connection signal="pressed" from="Settings/BindWindow/SubButton" to="." method="on_bind_sub"]
+[connection signal="pressed" from="Settings/BindWindow/AddButton" to="." method="on_bind_add"]
+[connection signal="pressed" from="Settings/BindWindow/Close" to="." method="on_bindbutton"]
+[connection signal="pressed" from="LockButton" to="." method="on_lock_pressed"]
+
+[editable path="Settings/Challenges/Container/Challenge0"]
+[editable path="Settings/Challenges/Container/Challenge1"]
+[editable path="Settings/Challenges/Container/Challenge2"]
+[editable path="Settings/Challenges/Container/Challenge3"]
+[editable path="Settings/Challenges/Container/Challenge4"]
+[editable path="Settings/Challenges/Container/Challenge5"]
