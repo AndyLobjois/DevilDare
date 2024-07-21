@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bucexj5a45u4b"]
+[gd_scene load_steps=26 format=3 uid="uid://bucexj5a45u4b"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_5nidb"]
 [ext_resource type="Theme" uid="uid://dmqbpgans8ta1" path="res://theme.tres" id="2_dlbho"]
@@ -134,6 +134,40 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7dnen"]
+
+[sub_resource type="GDScript" id="GDScript_gam8y"]
+script/source = "extends Node
+
+## Name of your exported executable
+var exename: String = \"DevilDare.exe\" # Include .exe in name
+## Window title to control the right application from tray
+@onready var apptitle: String = get_window().title
+## Organized data to save for use in the system tray
+var arguments: String
+## Path to your application location
+var path = OS.get_executable_path().get_base_dir()
+
+
+func _ready() -> void:
+	arguments = \"%s,%s\" %[exename,apptitle]
+	passData()
+	launchSystemTray()
+
+
+## If a windows export, exename, apptitle, and trayicon will be stored for the system tray
+func passData() -> void:
+	if OS.has_feature(\"release\") and OS.has_feature(\"windows\"):
+		var file = FileAccess.open(path.path_join(\"data.txt\"), FileAccess.WRITE)
+		file.store_line(arguments)
+
+
+## Launches the system tray functionality
+func launchSystemTray() -> void:
+	if OS.has_feature(\"release\") and OS.has_feature(\"windows\"):
+		var SystemTrayLauncher = path.path_join(\"TrayHandler.exe\")
+		OS.shell_open(SystemTrayLauncher)
+
+"
 
 [node name="Main" type="Control" node_paths=PackedStringArray("challenges")]
 layout_mode = 3
@@ -470,6 +504,9 @@ theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxFlat_vdqu2")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ujnlr")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_7dnen")
+
+[node name="SystemTray" type="Node" parent="."]
+script = SubResource("GDScript_gam8y")
 
 [connection signal="finished" from="Audio/AudioEnd" to="." method="on_audio_end"]
 [connection signal="item_selected" from="Settings/ReadType" to="." method="on_selected"]

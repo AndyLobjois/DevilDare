@@ -36,7 +36,7 @@ project/assembly_name="DevilDare"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/global_input/plugin.cfg")
 
 [input]
 

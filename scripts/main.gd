@@ -100,7 +100,6 @@ func _input(event : InputEvent):
 
 # SAVE/LOAD ---------------------------------------------------
 func save_data():
-	print("Saved !")
 	var file = FileAccess.open(savePath, FileAccess.WRITE)
 	file.store_var(get_window().position)
 	file.store_var(get_window().size)
